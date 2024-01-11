@@ -52,6 +52,17 @@ h6 {
   overflow-wrap: break-word;
 }
 
+button {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
+}
+
+button>img {
+  height: 1.2rem;
+}
+
 button,
 input[type=button],
 input[type=submit] {
@@ -60,8 +71,9 @@ input[type=submit] {
   border: 1px var(--border-color) solid;
   border-radius: var(--border-radius);
   transition: ease-in-out 0.25s all;
-  padding: 0.6rem 2rem;
+  padding: 0.6rem 0.8rem;
   cursor: pointer;
+  font-size: 0.9rem;
 }
 
 button:hover,
@@ -76,9 +88,7 @@ input[type=submit].primary {
   background-color: var(--foreground-color);
   color: var(--background-color);
   border: 1px var(--foreground-color) solid;
-  border-radius: var(--border-radius);
   transition: ease-in-out 0.25s all;
-  padding: 0.6rem 2rem;
   cursor: pointer;
   font-weight: bold;
 }
@@ -118,7 +128,9 @@ button.icon {
   padding: 0.6rem;
 }
 
-
+button.danger {
+  color: #E11D48;
+}
 
 a {
   color: var(--foreground-color);
@@ -147,6 +159,11 @@ p.secondary {
 label {
   margin: 0.2rem 0rem;
   display: inline-block;
+}
+
+.h-pad-1 {
+  padding-left: var(--gap-1);
+  padding-right: var(--gap-1);
 }
 
 .pad-1 {
@@ -178,6 +195,11 @@ label {
   border: 1px var(--border-color) solid;
   border-radius: var(--border-radius);
 }
+
+.border-bottom {
+  border-bottom: 1px var(--border-color) solid;
+}
+
 
 .w-m {
   max-width: 30rem;
