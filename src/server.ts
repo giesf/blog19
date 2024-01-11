@@ -12,7 +12,12 @@ export const startServer = () => {
         port: config.port,
         errorResponseFactory: (err) => {
             if (err.statusCode < 500) {
-                return new JSONErrorResponse(err)
+                const res = new JSONErrorResponse(err)
+                if ([403, 401].includes(err.statusCode)) {
+                    res.headers.set("WWW-Authenticate", 'Basic realm="Access to admin panel"')
+                }
+
+                return res;
             } else {
                 return new JSONErrorResponse(new HTTPError(500, "Internal Server Error"))
             }
