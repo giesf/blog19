@@ -4,11 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/base.css" />
     <title>Admin Panel</title>
 </head>
 
 <body>
-    <p>Logged in as ${d.username}</p>
+    <div class="pad-1 flex column">
+        <div class="w-l container flex">
+            <h2 style="flex-grow: 1;">Admin Panel</h2>
+            <p>Logged in as <b>${d.username}</b></p>
+        </div>
+        <div class="w-l flex space-between" style="padding-left: var(--gap-1);">
+            <div class="flex">
+                <a href="#drafts">
+                    <h3>Drafts</h3>
+                </a>
+                <a class="inactive" href="#posts">
+                    <h3>Posts</h3>
+                </a>
+                <a class="inactive" href="#settings">
+                    <h3>Page settings</h3>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="flex container w-l">
+            <div class="flex end w-l">
+                <button disabled>Delete draft</button>
+                <button class="primary">+ Create new draft</button>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="pad-1">
+    </div>
 </body>
 
 </html>

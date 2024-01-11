@@ -10,6 +10,7 @@ export const startServer = () => {
 
     server = startHTTPServer({
         port: config.port,
+        staticDir: "static",
         errorResponseFactory: (err) => {
             if (err.statusCode < 500) {
                 const res = new JSONErrorResponse(err)
