@@ -6,7 +6,7 @@
   "scripts": {
     "start": "bun run src/server.ts",
     "cli": "bun run src/cli.ts",
-    "build:cli": "bun build src/cli.ts --compile --outfile=bin/se19"
+    "build:cli": "bun build src/cli/cli.ts --compile --outfile=bin/se19"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -16,7 +16,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@giesf/sprit": "^0.0.3",
+    "@giesf/sprit": "0.1.4",
+    "js-toml": "^1.0.0",
+    "valibot": "^0.25.0",
     "yargs-parser": "^21.1.1"
   }
 }

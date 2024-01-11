@@ -2,27 +2,19 @@
 
 import yargs from 'yargs-parser'
 import path from 'path'
-import { startServer } from './server'
+import { commands, type CLICommand } from './commands';
+import { configKeyToEnvKey } from '../config/utils';
 
 const args = yargs(Bun.argv);
 const binaryName = path.parse(String(args._[1])).base
 const command = args._[2]
 const commandArguments = args._.slice(3)
 
-type CLICommand = {
-    usage: string,
-    description?: string,
-    handler: Function
-}
+const argEntries = Object.entries(args).filter(([key]) => key != "_")
 
-const commands: {
-    [index: string]: CLICommand
-} = {
-    "serve": {
-        "usage": "serve [port]",
-        "description": "Serves the web application on port",
-        "handler": (port: number) => { startServer(port) }
-    }
+for (const entry of argEntries) {
+    const [key, value] = entry;
+    process.env[configKeyToEnvKey(key)] = value;
 }
 
 if (typeof command == "string") {
@@ -58,5 +50,6 @@ function printCommandUsage(cmd: CLICommand) {
     console.log(`   ${binaryName} ${cmd.usage}\t${cmd.description}`)
     console.log("")
 }
+
 
 
