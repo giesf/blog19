@@ -5,8 +5,7 @@
   "bin": "src/cli.ts",
   "scripts": {
     "start": "bun run src/server.ts",
-    "cli": "bun run src/cli.ts",
-    "build:cli": "bun build src/cli/cli.ts --compile --outfile=bin/se19"
+    "cli": "bun run src/cli/cli.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
