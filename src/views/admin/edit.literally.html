@@ -1,1 +1,113 @@
-<button class="danger" disabled><img src="/static/icons/trash-red.svg" /> Delete draft</button>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/base.css" />
+    <title>Admin Panel</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/vanillawc/wc-monaco-editor@1/index.js"></script>
+
+</head>
+
+<body>
+    <div class=" flex column spacing-2">
+        <div class="w-xl pad-1 flex border-bottom ">
+            <a href="/admin/" style="flex-grow: 1;">
+                <h2>Admin Panel</h2>
+            </a>
+            <p>Logged in as <b>${d.username}</b></p>
+        </div>
+        <div class="w-l flex column pad-1">
+
+            <div class="w-l flex space-between column-on-mobile">
+                <div class="flex w-m" stlye="flex-grow: 2;">
+                    <input id="title" class="w-l" type="text" placeholder="title" ${typeof
+                        d.draft.published_at=="undefined" ? "" :"readonly" } value="${d.draft.title}">
+                </div>
+
+                <div class="flex column-on-mobile fw-on-mobile" style="flex-shrink: 0;">
+                    <button id="save" class="fw-on-mobile" onclick="saveDraft();"><img src="/static/icons/save.svg" />
+                        Save</button>
+
+
+
+                </div>
+
+
+            </div>
+            <div class="flex end w-l">
+                <p>Last saved <span data-date="${d.draft.last_edited_at}">${d.formatDate(d.draft.last_edited_at)}</span>
+                </p>
+            </div>
+            <div class="flex w-l column" style="min-height: 35rem;">
+                <!-- <textarea style="min-height: 35rem; font-family: monospace;" id="markdown_body" class=" w-l"
+                    onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">${d.draft.markdown_body}</textarea> -->
+                <wc-monaco-editor
+                    style="min-height: 35rem; border-radius: calc(var(--border-radius)/2); overflow: hidden; border: 1px var(--border-color) solid;"
+                    language="markdown" id="markdown_body" src="/admin/actions/body/${d.draft.slug}"></wc-monaco-editor>
+
+            </div>
+
+            <div class="w-l flex space-between">
+                <button class="danger" hx-post="/admin/actions/delete/${d.draft.slug}"
+                    hx-confirm="Are you sure you want to delete this post?"><img
+                        src="/static/icons/trash-red.svg" />Delete</button>
+                ${typeof d.draft.published_at == "undefined" ? `<button class="primary fw-on-mobile"
+                    hx-post="/admin/actions/publish/${d.draft.slug}"
+                    hx-confirm="Are you sure you want to publish this draft?"><img src="/static/icons/plus-dark.svg" />
+                    Publish</button>`:"Already published"}
+            </div>
+
+        </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/2.0.2/timeago.min.js"></script>
+
+    <script>
+        setInterval(() => {
+            const els = document.querySelectorAll("[data-date]")
+            els.forEach(el => {
+                const date = new Date(el.getAttribute("data-date"))
+                el.innerText = timeago().format(date)
+            })
+        }, 5000)
+
+        async function saveDraft() {
+
+            document.getElementById("save").innerText = "Saving...";
+            document.getElementById("save").disabled = true;
+            const title = document.getElementById("title").value;
+            const markdown_body = document.getElementById("markdown_body").value;
+            const res = await fetch("/admin/actions/save/${d.draft.slug}", {
+                method: "POST", // or 'PUT'
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ title, markdown_body }),
+            });
+            if (res.status == 200) {
+                document.getElementById("save").innerText = "Saved";
+                document.getElementById("save").disabled = false;
+
+                setTimeout(() => {
+                    document.getElementById("save").innerText = "Save";
+
+                }, 500)
+            } else {
+                document.getElementById("save").innerText = "Error";
+
+            }
+            console.log()
+            const redirectionTarget = res.headers.get('hx-redirect')
+            if (redirectionTarget) window.location.href = redirectionTarget
+
+
+        }
+    </script>
+
+
+</body>
+
+</html>

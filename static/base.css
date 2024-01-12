@@ -1,6 +1,7 @@
 :root {
   --background-color: #040812;
   --border-color: #1F2937;
+  --primary-color: #2563eb;
   --foreground-color: #F8FAFB;
   --foreground-secondary: #9ca3af;
   --border-radius: 6pt;
@@ -114,7 +115,7 @@ textarea {
   border: 1px var(--border-color) solid;
   border-radius: var(--border-radius);
   padding: 0.4rem 0.8rem;
-  cursor: pointer;
+  cursor: text;
 }
 
 input[type=text]:focus,
@@ -156,9 +157,24 @@ p.secondary {
   color: var(--foreground-secondary)
 }
 
+p>a {
+  color: var(--primary-color);
+}
+
 label {
   margin: 0.2rem 0rem;
   display: inline-block;
+}
+
+pre {
+  max-width: 100%;
+}
+
+code {
+  border-radius: calc(var(--border-radius)/2);
+  margin-top: var(--gap-1);
+  margin-bottom: var(--gap-1);
+  max-width: 100%;
 }
 
 .h-pad-1 {
@@ -194,6 +210,11 @@ label {
   padding: var(--gap-1);
   border: 1px var(--border-color) solid;
   border-radius: var(--border-radius);
+  transition: 0.5s ease-in-out all;
+}
+
+a:hover .container {
+  background-color: var(--border-color);
 }
 
 .border-bottom {
@@ -266,4 +287,20 @@ label {
   .start-on-mobile {
     align-items: start;
   }
+
+  .fw-on-mobile {
+    width: 100%;
+  }
+}
+
+.htmx-indicator {
+  display: none;
+}
+
+.htmx-request .htmx-indicator {
+  display: inline;
+}
+
+.htmx-request.htmx-indicator {
+  display: inline;
 }

@@ -1,5 +1,7 @@
 import { loadConfig } from '../config/loader'
+import { initTables } from '../data/tables'
 import { startServer } from '../server'
+import { initDB } from '../services/db'
 import { startWizard } from './wizard'
 
 export type CLICommand = {
@@ -16,6 +18,8 @@ export const commands: {
         "description": "Serves the web application on port",
         "handler": async () => {
             await loadConfig()
+            await initDB()
+            await initTables()
             startServer()
         }
     },

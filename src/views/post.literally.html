@@ -6,55 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/base.css" />
     <title>${d.pageTitle}</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
 </head>
 
 <body>
     <div class="pad-1 flex column">
         <div class="w-l flex">
             <a href="/" style="width: 100%;">
-                <h2>Bernd's Blog</h2>
+                <div class="fw flex start spacing-0">
+                    <img src="/static/avatar.jpg"
+                        style="width: 3rem; height: 3rem; border-radius: 1.6rem; border: 1px var(--border-color) solid; margin-right:0.8rem;" />
+                    <h2 style="font-size: 1.5rem;">${d.pageTitle}</h2>
+                </div>
             </a>
             <a href="#"><button class="icon"><img src="/static/icons/github.svg" /></button></a>
         </div>
         <div class="w-l container flex column start">
-            <div class="w-l flex space-between column-on-mobile start-on-mobile">
-                <h3>Building a basic web blog for fun and profit (10etcs!)</h3>
-                <p class="secondary">Posted yesterday</p>
+            <div class="w-l flex space-between column start">
+                <h1>${d.post.title}</h1>
+                <p class="secondary">Posted ${d.formatDate(d.post.published_at)}</p>
             </div>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et lorem vitae ante commodo gravida
-                id quis sapien.
-                Nulla eget justo dapibus nulla porttitor tincidunt. Nulla viverra mollis orci at sodales. Fusce sed
-                malesuada mi.
-                Vivamus elementum gravida est, nec auctor ex ultrices vel. Aliquam bibendum magna erat, nec dictum ipsum
-                gravida id. Ut
-                urna massa, mollis eu tincidunt ut, ullamcorper luctus enim. Nunc convallis purus nibh, eget efficitur
-                enim dictum vel.
-                Morbi fermentum euismod varius. Etiam eget tellus ligula. Phasellus odio ipsum, auctor convallis eros
-                sed, finibus
-                vestibulum tellus.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et lorem vitae ante commodo gravida
-                id quis sapien.
-                Nulla eget justo dapibus nulla porttitor tincidunt. Nulla viverra mollis orci at sodales. Fusce sed
-                malesuada mi.
-                Vivamus elementum gravida est, nec auctor ex ultrices vel. Aliquam bibendum magna erat, nec dictum ipsum
-                gravida id. Ut
-                urna massa, mollis eu tincidunt ut, ullamcorper luctus enim. Nunc convallis purus nibh, eget efficitur
-                enim dictum vel.
-                Morbi fermentum euismod varius. Etiam eget tellus ligula. Phasellus odio ipsum, auctor convallis eros
-                sed, finibus
-                vestibulum tellus.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et lorem vitae ante commodo gravida
-                id quis sapien.
-                Nulla eget justo dapibus nulla porttitor tincidunt. Nulla viverra mollis orci at sodales. Fusce sed
-                malesuada mi.
-                Vivamus elementum gravida est, nec auctor ex ultrices vel. Aliquam bibendum magna erat, nec dictum ipsum
-                gravida id. Ut
-                urna massa, mollis eu tincidunt ut, ullamcorper luctus enim. Nunc convallis purus nibh, eget efficitur
-                enim dictum vel.
-                Morbi fermentum euismod varius. Etiam eget tellus ligula. Phasellus odio ipsum, auctor convallis eros
-                sed, finibus
-                vestibulum tellus.</p>
+            <div class="fw flex start column spacing-1">
+                ${d.renderMarkdown(d.post.markdown_body)}
+            </div>
         </div>
 
         <div class="w-l flex end">
@@ -62,6 +40,8 @@
             <a href="/admin">Login</a>
         </div>
     </div>
+    <script>hljs.highlightAll();</script>
+
 </body>
 
 </html>

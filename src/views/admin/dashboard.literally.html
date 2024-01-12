@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/base.css" />
     <title>Admin Panel</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
 </head>
 
 <body>
@@ -15,37 +17,49 @@
             <p>Logged in as <b>${d.username}</b></p>
         </div>
         <div class="w-l flex column pad-1">
-            <div class="w-l flex space-between">
+            <div class="w-l flex space-between column-on-mobile">
                 <div class="flex">
-                    <a href="#drafts">
+                    <a ${d.selectedTab !="drafts" ? 'class="inactive"' :''} href="/admin/">
                         <h3>Drafts</h3>
                     </a>
-                    <a class="inactive" href="#posts">
-                        <h3>Posts</h3>
+                    <a ${d.selectedTab !="published" ? 'class="inactive"' :''} href="/admin/published">
+                        <h3>Published</h3>
+                    </a>
+                    <!-- <a class="inactive" href="#files">
+                        <h3>Files</h3>
                     </a>
                     <a class="inactive" href="#settings">
                         <h3>Page settings</h3>
-                    </a>
+                    </a> -->
                 </div>
-                <button class="primary"><img src="/static/icons/plus-dark.svg" /> Create new draft</button>
+                <button class="primary fw-on-mobile" hx-post="/admin/actions/createDraft"><img
+                        src="/static/icons/plus-dark.svg" /> Create new draft</button>
 
 
             </div>
             <div class="flex w-l column">
-                <a class="w-l" href="/posts/for-fun-and-profit">
+                ${d.drafts.map(draft=>{
+                return `
+                <a class="w-l" href="/admin/edit/${draft.slug}">
                     <div class="w-l container flex space-between column-on-mobile start-on-mobile">
-                        <h3>Building a basic web blog for fun and profit (10etcs!)</h3>
-                        <p class="secondary">Posted yesterday</p>
+                        <h3>${draft.title}</h3>
+                        <p class="secondary">Last edited ${d.formatDate(draft.last_edited_at)}</p>
                     </div>
                 </a>
-                <a class="w-l" href="/posts/nasa-gehackt">
-                    <div class="w-l container flex space-between column-on-mobile start-on-mobile">
-                        <h3>How to hack the NASA in 10 easy steps!</h3>
-                        <p class="secondary">Posted last week</p>
-                    </div>
-                </a>
+                `
+                }).join("")}
 
 
+                ${
+                d.drafts.length == 0 ? `
+                <div class="w-l container flex space-between column-on-mobile start-on-mobile">
+                    <p>Nothing here yet :(</p>
+                </div>
+                `:""
+                }
+            </div>
+            <div class="w-l flex end">
+                <a href="/">Exit</a>
             </div>
         </div>
 
