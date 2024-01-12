@@ -13,12 +13,15 @@ export async function startWizard() {
         inputIsMuted = true;
         rl.question("Enter a password for the admin account:\n", (pw: string) => {
             inputIsMuted = false;
-            hash(pw).then((hashedPw) => {
-                const configTOML = `adminUser = "${username}"\nadminPasswordHash = "${hashedPw}"`
-                Bun.write(outFile, configTOML)
-                console.log("Configuration written to " + outFile)
-            })
-            rl.close();
+            rl.question("Enter a title for your blog:\n", (pageTitle: string) => {
+
+                hash(pw).then((hashedPw) => {
+                    const configTOML = `adminUser = "${username}"\nadminPasswordHash = "${hashedPw}"\npageTitle = "${pageTitle}"`
+                    Bun.write(outFile, configTOML)
+                    console.log("Configuration written to " + outFile)
+                })
+                rl.close();
+            });
         });
     });
 }
