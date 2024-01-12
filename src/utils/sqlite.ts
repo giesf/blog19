@@ -33,7 +33,7 @@ export async function sqlite<T>(strings: TemplateStringsArray, ...params: any[])
     const db = useDB()
 
     const { queryString, paramsObj } = constructQuery(strings, params)
-    console.log(queryString)
+
     const query = db.query(queryString)
     return query.all(paramsObj) as Array<T>
 }
