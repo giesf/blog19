@@ -1,16 +1,15 @@
 {
   "name": "@giesf/se_19",
   "module": "src/server.ts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
-  "bin": "src/cli/cli.ts",
+  "bin": "dist/cli.js",
   "scripts": {
     "start": "bun run src/server.ts",
     "cli": "bun run src/cli/cli.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/yargs": "^17.0.32"
+    "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
