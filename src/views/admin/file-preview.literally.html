@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/base.css" />
+    <title>Admin Panel</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/vanillawc/wc-monaco-editor@1/index.js"></script>
+
+</head>
+
+<body>
+    <div class=" flex column spacing-2">
+
+        <div class="w-xl pad-1 flex border-bottom ">
+            <a href="/admin/" style="flex-grow: 1;">
+                <h2>Admin Panel</h2>
+            </a>
+            <p>Logged in as <b>${d.username}</b></p>
+        </div>
+        <div class="w-l flex space-between column-on-mobile pad-1">
+            <div class="flex">
+                <a ${d.selectedTab !="drafts" ? 'class="inactive"' :''} href="/admin/">
+                    <h3>Drafts</h3>
+                </a>
+                <a ${d.selectedTab !="published" ? 'class="inactive"' :''} href="/admin/published">
+                    <h3>Published</h3>
+                </a>
+                <a ${d.selectedTab !="files" ? 'class="inactive"' :''} href="/admin/files">
+                    <h3>Files</h3>
+                </a>
+                <!-- <a class="inactive" href="#settings">
+                                <h3>Page settings</h3>
+                            </a> -->
+            </div>
+            <div class="flex">
+                <button class="danger fw-on-mobile" hx-confirm="Are you sure?"
+                    hx-post="/admin/actions/delete-file/${d.filename}"><img src="/static/icons/trash-red.svg" />
+                    Delete file</button>
+                <a href="/admin/file-upload"> <button class="primary fw-on-mobile"><img
+                            src="/static/icons/plus-dark.svg" />
+                        Upload
+                        new file</button>
+                </a>
+            </div>
+
+        </div>
+        <div class="w-l flex column pad-1">
+            <input class="fw" type="text" readonly value="![alt text](${d.imgSrc})" />
+            <img src="${d.imgSrc}" />
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,8 +1,8 @@
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
 bin
+static/uploads
 config.toml
-
 # Logs
 
 logs

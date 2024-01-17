@@ -54,7 +54,7 @@
                 <button class="danger" hx-post="/admin/actions/delete/${d.draft.slug}"
                     hx-confirm="Are you sure you want to delete this post?"><img
                         src="/static/icons/trash-red.svg" />Delete</button>
-                ${typeof d.draft.published_at == "undefined" ? `<button class="primary fw-on-mobile"
+                ${typeof d.draft.published_at == "undefined"  ? `<button class="primary fw-on-mobile"
                     hx-post="/admin/actions/publish/${d.draft.slug}"
                     hx-confirm="Are you sure you want to publish this draft?"><img src="/static/icons/plus-dark.svg" />
                     Publish</button>`:"Already published"}

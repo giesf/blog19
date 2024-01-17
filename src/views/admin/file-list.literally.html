@@ -25,26 +25,24 @@
                     <a ${d.selectedTab !="published" ? 'class="inactive"' :''} href="/admin/published">
                         <h3>Published</h3>
                     </a>
-                    <a class="inactive" href="/admin/files">
+                    <a ${d.selectedTab !="files" ? 'class="inactive"' :''} href="/admin/files">
                         <h3>Files</h3>
                     </a>
-                    <!--
-                    <a class="inactive" href="#settings">
+                    <!-- <a class="inactive" href="#settings">
                         <h3>Page settings</h3>
                     </a> -->
                 </div>
-                <button class="primary fw-on-mobile" hx-post="/admin/actions/createDraft"><img
-                        src="/static/icons/plus-dark.svg" /> Create new draft</button>
-
+                <a href="/admin/file-upload"> <button class="primary fw-on-mobile"><img
+                            src="/static/icons/plus-dark.svg" /> Upload new file</button>
+                </a>
 
             </div>
             <div class="flex w-l column">
-                ${d.drafts.map(draft=>{
+                ${d.files.map(file=>{
                 return `
-                <a class="w-l" href="/admin/edit/${draft.slug}">
+                <a class="w-l" href="/admin/file-preview/${file}">
                     <div class="w-l container flex space-between column-on-mobile start-on-mobile">
-                        <h3>${draft.title}</h3>
-                        <p class="secondary">Last edited ${d.formatDate(draft.last_edited_at)}</p>
+                        <h3>${file}</h3>
                     </div>
                 </a>
                 `
@@ -52,7 +50,7 @@
 
 
                 ${
-                d.drafts.length == 0 ? `
+                d.files.length == 0 ? `
                 <div class="w-l container flex space-between column-on-mobile start-on-mobile">
                     <p>Nothing here yet :(</p>
                 </div>

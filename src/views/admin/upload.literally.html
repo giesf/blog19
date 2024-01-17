@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/base.css" />
+    <title>Admin Panel</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/vanillawc/wc-monaco-editor@1/index.js"></script>
+
+</head>
+
+<body>
+    <div class=" flex column spacing-2">
+        <div class="w-xl pad-1 flex border-bottom ">
+            <a href="/admin/" style="flex-grow: 1;">
+                <h2>Admin Panel</h2>
+            </a>
+            <p>Logged in as <b>${d.username}</b></p>
+        </div>
+        <div class="w-l flex column pad-1">
+
+            <form class="flex column spacing-1" action="/admin/actions/upload" method="post"
+                enctype="multipart/form-data">
+                <input type="file" name="file" />
+                <br />
+                <div class="flex">
+                    <a href="/admin/files">
+                        <input type="button" value="Cancel" />
+                    </a>
+                    <input type="submit" class="primary" value="Upload" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
