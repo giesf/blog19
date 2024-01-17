@@ -1,8 +1,9 @@
 {
-  "name": "se_19",
+  "name": "@giesf/se_19",
   "module": "src/server.ts",
+  "version": "0.0.1",
   "type": "module",
-  "bin": "src/cli.ts",
+  "bin": "src/cli/cli.ts",
   "scripts": {
     "start": "bun run src/server.ts",
     "cli": "bun run src/cli/cli.ts"
