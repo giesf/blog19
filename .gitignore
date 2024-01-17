@@ -3,6 +3,7 @@
 bin
 static/uploads
 config.toml
+*.sqlite
 # Logs
 
 logs
