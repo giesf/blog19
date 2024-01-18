@@ -22,7 +22,8 @@
                     <h2 style="font-size: 1.5rem;">${d.pageTitle}</h2>
                 </div>
             </a>
-            <a href="#"><button class="icon"><img src="/static/icons/github.svg" /></button></a>
+            ${d.githubURL ? `<a href="${d.githubURL}" target="_blank"><button class="icon"><img
+                        src="/static/icons/github.svg" /></button></a>`:''}
         </div>
         <div class="w-l container flex column start">
             <div class="w-l flex space-between column start">

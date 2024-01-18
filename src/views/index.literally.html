@@ -18,7 +18,8 @@
                     style="width: 3rem; height: 3rem; border-radius: 1.6rem; border: 1px var(--border-color) solid; margin-right:0.8rem;" />
                 <h2 style="font-size: 1.5rem;">${d.pageTitle}</h2>
             </div>
-            <a href="#"><button class="icon"><img src="/static/icons/github.svg" /></button></a>
+            ${d.githubURL ? `<a href="${d.githubURL}" target="_blank"><button class="icon"><img
+                        src="/static/icons/github.svg" /></button></a>`:''}
         </div>
 
         ${ d.posts.map(post=>{

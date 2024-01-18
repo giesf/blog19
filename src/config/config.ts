@@ -10,7 +10,8 @@ export const defaultConfig: Config = {
     pageTitle: "Blog",
     adminUser: "admin",
     adminPasswordHash: "$argon2id$v=19$m=65536,t=2,p=1$gFOXNWqYyBwLo0L5mlV4FLR4fS3aK/7IMwo1pySciL0$NWT6AjO5rjFcUHtQ6L08KMnEOHvyWdzqgidYTvVLPPQ",
-    sqliteFile: "data.sqlite"
+    sqliteFile: "data.sqlite",
+    githubURL: ""
 }
 
 

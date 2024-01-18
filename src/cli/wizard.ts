@@ -1,37 +1,67 @@
+import readlineAsync from 'readline/promises';
 import readline from 'readline';
 import { envKeyPrefix } from '../config/config';
 let inputIsMuted = false;
 
 const hash = async (a: string) => await Bun.password.hash(a)
 
+
+const questions: Array<{ key: string, wording: string, writeOnly?: boolean }> = [
+    {
+        "key": "adminUser",
+        "wording": "Enter a username for the admin account:",
+    },
+    {
+        "key": "adminPasswordHash",
+        "wording": "Enter a password for the admin account:",
+        "writeOnly": true,
+    },
+    {
+        "key": "pageTitle",
+        "wording": "Enter a title for your blog:",
+    },
+    {
+        "key": "githubURL",
+        "wording": "Enter the url to your github profile (leave empty to disable):"
+    }
+]
+
+
 export async function startWizard() {
-    const rl = makeInterface()
 
     const outFile = process.env[envKeyPrefix + "O"] ?? "config.toml"
+    let currentQuestion = 0;
+    let answers: { [index: string]: string } = {};
+    const rl = makeInterface()
 
-    rl.question("Enter a username for the admin account:\n", (username: string) => {
-        inputIsMuted = true;
-        rl.question("Enter a password for the admin account:\n", (pw: string) => {
-            inputIsMuted = false;
-            rl.question("Enter a title for your blog:\n", (pageTitle: string) => {
+    async function askQuestion() {
+        const q = questions[currentQuestion]
+        inputIsMuted = q.writeOnly || false;
 
-                hash(pw).then((hashedPw) => {
-                    const configTOML = `adminUser = "${username}"\nadminPasswordHash = "${hashedPw}"\npageTitle = "${pageTitle}"`
-                    Bun.write(outFile, configTOML)
-                    console.log("Configuration written to " + outFile)
-                })
-                rl.close();
-            });
-        });
-    });
+        const answer = await rl.question(q.wording + "\n");
+
+        answers[q.key] = q.writeOnly ? await hash(answer) : answer;
+
+        currentQuestion++
+        if (currentQuestion < questions.length) {
+            await askQuestion()
+        }
+    }
+
+    await askQuestion()
+    rl.close()
+    const tomlString = Object.entries(answers).map(([key, value]) => `${key} = ${JSON.stringify(value)}`).join("\n")
+    Bun.write(outFile, tomlString)
+    console.log(`Config saved to "${outFile}" !`)
+
 }
 
 
 function makeInterface() {
-    const rl: readline.Interface & {
+    const rl: readlineAsync.Interface & {
         input: NodeJS.ReadableStream,
         output: NodeJS.WriteStream
-    } = readline.createInterface({
+    } = readlineAsync.createInterface({
         input: process.stdin,
         output: process.stdout
     }) as any;
