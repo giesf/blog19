@@ -14,8 +14,8 @@
     <div class="pad-1 flex column">
         <div class="w-l flex">
             <div class="fw flex start spacing-0">
-                <img src="/static/avatar.jpg"
-                    style="width: 3rem; height: 3rem; border-radius: 1.6rem; border: 1px var(--border-color) solid; margin-right:0.8rem;" />
+                <img src="/static/avatar.jpg" class="avatar"
+                    onerror="this.onerror=null;this.src='/static/default-avatar.jpg'" />
                 <h2 style="font-size: 1.5rem;">${d.pageTitle}</h2>
             </div>
             ${d.githubURL ? `<a href="${d.githubURL}" target="_blank"><button class="icon"><img
