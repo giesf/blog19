@@ -67,6 +67,7 @@ function makeInterface() {
     }) as any;
 
 
+    //This was lifted from a stackoverflow comment
     rl.input.on("keypress", () => {
         if (!inputIsMuted) return;
         // get the number of characters entered so far:
