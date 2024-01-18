@@ -8,8 +8,12 @@ import { join } from 'path'
 let server: undefined | Server;
 
 export const startServer = () => {
-    console.log("[SRv]", import.meta.dir)
-    fs.cpSync(join(import.meta.dir, "../static"), "./static", { recursive: true })
+    const applicationSupportDir = join(import.meta.dir, "..")
+    const cwd = process.cwd()
+
+    //If we are running se_19 somewhere that is not the project directory, copy static files there
+    if (cwd != applicationSupportDir) fs.cpSync(join(import.meta.dir, "../static"), "./static", { recursive: true })
+
     server = startHTTPServer({
         port: config.port,
         staticDir: "static",

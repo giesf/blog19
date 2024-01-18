@@ -17,7 +17,6 @@ function constructQuery(strings: TemplateStringsArray, params: any[]) {
 
         // Hacky solution to support offset as there seems to be an issue with preparing statements here
         if (chunk.endsWith("OFFSET ") && typeof params[index] == "number") {
-            console.log(index)
             queryString += chunk + params[index]
             delete paramsObj["$" + (index + 1)]
         } else {
