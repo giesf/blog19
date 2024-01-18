@@ -12,7 +12,14 @@ export const startServer = () => {
     const cwd = process.cwd()
 
     //If we are running se_19 somewhere that is not the project directory, copy static files there
-    if (cwd != applicationSupportDir) fs.cpSync(join(import.meta.dir, "../static"), "./static", { recursive: true })
+    if (cwd != applicationSupportDir) {
+        try {
+            fs.readdirSync("./static")
+        } catch (err) {
+            console.log("Creating static dir...")
+            fs.cpSync(join(import.meta.dir, "../static"), "./static", { recursive: true })
+        }
+    }
 
     server = startHTTPServer({
         port: config.port,

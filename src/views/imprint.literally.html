@@ -24,29 +24,16 @@
                         src="/static/icons/github.svg" /></button></a>`:''}
         </div>
 
-        ${ d.posts.map(post=>{
-        return `
-        <a class="w-l" href="/posts/${post.slug}">
-            <div class="w-l container flex space-between column-on-mobile start-on-mobile">
-                <h3>${post.title}</h3>
-                <p class="secondary">${d.formatDate(post.published_at)}</p>
-            </div>
-        </a>
-        `
-        }).join("")}
-        ${
-        d.posts.length == 0 ? `
-        <div class="w-l container flex space-between column-on-mobile start-on-mobile">
-            <p>Nothing here yet :(</p>
+
+        <div class="w-l container flex column start">
+            ${d.renderMarkdown(d.imprintBody)}
         </div>
-        `:""
-        }
+
 
 
 
 
         <div class="w-l flex end">
-            <a href="/imprint">Imprint</a>
             <a href="/admin">Login</a>
         </div>
     </div>
