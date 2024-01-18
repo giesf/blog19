@@ -5,7 +5,8 @@ export const ConfigSchema = object({
     pageTitle: string([minLength(1, "Page title must be set")]),
     adminUser: string([minLength(3, "Admin username must be at least 3 characters long")]),
     adminPasswordHash: string([startsWith("$argon2id", "Should be an argon2id hash")]),
-    sqliteFile: string("Path for SQLITE DB file needs to be defined"),
     githubURL: optional(string()),
+    avatarURL: optional(string()),
+    sqliteFile: string("Path for SQLITE DB file needs to be defined"),
     configFile: optional(string())
 })

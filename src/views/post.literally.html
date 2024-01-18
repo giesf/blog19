@@ -17,8 +17,8 @@
         <div class="w-l flex">
             <a href="/" style="width: 100%;">
                 <div class="fw flex start spacing-0">
-                    <img src="/static/avatar.jpg" class="avatar"
-                        onerror="this.onerror=null;this.src='/static/default-avatar.jpg'" />
+                    ${d.avatarURL ? `<img src="${d.avatarURL}" class="avatar"
+                        onerror="this.onerror=null;this.src='/static/default-avatar.jpg'" />`:""}
                     <h2 style="font-size: 1.5rem;">${d.pageTitle}</h2>
                 </div>
             </a>

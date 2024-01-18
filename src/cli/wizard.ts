@@ -13,16 +13,20 @@ const questions: Array<{ key: string, wording: string, writeOnly?: boolean }> = 
     },
     {
         "key": "adminPasswordHash",
-        "wording": "Enter a password for the admin account:",
+        "wording": "Password for the admin account:",
         "writeOnly": true,
     },
     {
         "key": "pageTitle",
-        "wording": "Enter a title for your blog:",
+        "wording": "Title for your blog:",
+    },
+    {
+        "key": "avatarURL",
+        "wording": "Path or url of your avatar (leave empty to disable):"
     },
     {
         "key": "githubURL",
-        "wording": "Enter the url to your github profile (leave empty to disable):"
+        "wording": "Url of your github profile (leave empty to disable):"
     }
 ]
 
