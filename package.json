@@ -1,10 +1,10 @@
 {
-  "name": "@giesf/se_19",
+  "name": "blog19",
   "module": "src/server.ts",
   "version": "0.0.14",
   "type": "module",
   "bin": {
-    "@giesf/se_19": "src/cli/cli.ts"
+    "blog19": "src/cli/cli.ts"
   },
   "scripts": {
     "start": "bun run src/server.ts",
