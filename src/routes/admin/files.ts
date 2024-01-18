@@ -10,7 +10,7 @@ export async function get(req: SimpleGetRequest) {
         const html = await renderView("admin/file-list", { selectedTab: "files", files, username: config.adminUser })
         return new HTMLResponse(html)
     } catch (err: any) {
-        return new HTMLResponse(err.message)
-
+        const html = await renderView("admin/file-list", { selectedTab: "files", files: [], err, username: config.adminUser })
+        return new HTMLResponse(html)
     }
 }

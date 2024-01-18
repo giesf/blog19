@@ -1,4 +1,4 @@
-#!~/.bun/bin/bun
+#!/usr/bin/env bun
 
 import yargs from 'yargs-parser'
 import path from 'path'

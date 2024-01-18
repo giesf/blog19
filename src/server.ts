@@ -2,15 +2,18 @@ import { HTTPError, JSONErrorResponse, JSONResponse, startHTTPServer } from "@gi
 import { config } from "./config/config";
 import { guard, parseBasicAuthHeader, verfiyCredentials } from "./auth";
 import type { Server } from "bun";
+import fs from 'fs'
 
-
+import { join } from 'path'
 let server: undefined | Server;
 
 export const startServer = () => {
-
+    console.log("[SRv]", import.meta.dir)
+    fs.cpSync(join(import.meta.dir, "../static"), "./static", { recursive: true })
     server = startHTTPServer({
         port: config.port,
         staticDir: "static",
+        routesDir: join(import.meta.dir, "routes"),
         errorResponseFactory: (err) => {
             if (err.statusCode < 500) {
                 const res = new JSONErrorResponse(err)

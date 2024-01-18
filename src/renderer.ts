@@ -1,8 +1,8 @@
 import { marked } from 'marked';
 import * as timeago from 'timeago.js'
-
+import { join } from 'path'
 export const renderView = async (viewKey: string, params: any) => {
-    const viewFile = Bun.file('src/views/' + viewKey + '.literally.html');
+    const viewFile = Bun.file(join(import.meta.dir, 'views/' + viewKey + '.literally.html'));
     const viewFileContents = await viewFile.text();
     const render = compile(viewFileContents);
 

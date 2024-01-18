@@ -13,6 +13,7 @@ export const defaultConfig: Config = {
     sqliteFile: "data.sqlite"
 }
 
+
 export let config: Config = defaultConfig;
 
 export const overrideConfig = (conf: Config) => {
