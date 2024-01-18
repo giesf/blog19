@@ -40,7 +40,7 @@ blog19 prioritises configuration based on where it is set. Command arguments ove
 ### Configuration variables
 | argument/toml key | ENV_KEY | description | default |
 |--------|-------|------------------|------|
-|configFile|B19_SQLITE_FILE|Path of sqlite file to use for storing blog posts etc.|EMPTY|
+|configFile|B19_CONFIG_FILE|Path of sqlite file to use for storing blog posts etc.|EMPTY|
 |port|B19_PORT|port to listen for http requests on|3000|
 |pageTitle|B19_PAGE_TITLE|title of the blog|Blog|
 |adminUser|B19_ADMIN_USER|username for admin account|admin|
