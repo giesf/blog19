@@ -46,5 +46,8 @@ export const loadEnvConfig = () => {
 
     const rawConfig = Object.fromEntries(configEntries)
 
+    // Hacky but does the job
+    if (rawConfig.port) rawConfig.port = parseInt(rawConfig.port)
+
     return parse(partial(ConfigSchema), rawConfig)
 }

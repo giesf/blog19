@@ -7,7 +7,7 @@ export async function get(req: SimpleGetRequest) {
     try {
         const slug = req.params.slug;
         const post = await getPost(slug)
-        const html = await renderView("post", { post, pageTitle: config.pageTitle, githubURL: config.githubURL, avatarURL: config.avatarURL })
+        const html = await renderView("post", { post, pageTitle: config.pageTitle, githubUrl: config.githubUrl, avatarUrl: config.avatarUrl })
         return new HTMLResponse(html)
     } catch (err: any) {
         return new HTMLResponse(err.message)

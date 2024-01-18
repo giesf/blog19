@@ -21,11 +21,11 @@ const questions: Array<{ key: string, wording: string, writeOnly?: boolean }> = 
         "wording": "Title for your blog:",
     },
     {
-        "key": "avatarURL",
+        "key": "avatarUrl",
         "wording": "Path or url of your avatar (leave empty to disable):"
     },
     {
-        "key": "githubURL",
+        "key": "githubUrl",
         "wording": "Url of your github profile (leave empty to disable):"
     }
 ]
@@ -57,6 +57,11 @@ export async function startWizard() {
     const tomlString = Object.entries(answers).map(([key, value]) => `${key} = ${JSON.stringify(value)}`).join("\n")
     Bun.write(outFile, tomlString)
     console.log(`Config saved to "${outFile}" !`)
+    console.log(`
+    To run blog19 with the new configuration file use
+
+    bunx blog19 serve --configFile=${outFile}
+    `)
 
 }
 

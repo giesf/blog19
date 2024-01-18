@@ -15,12 +15,12 @@
         <div class="w-l flex">
             <a href="/" style="width: 100%;">
                 <div class="fw flex start spacing-0">
-                    ${d.avatarURL ? `<img src="${d.avatarURL}" class="avatar"
+                    ${d.avatarUrl ? `<img src="${d.avatarUrl}" class="avatar"
                         onerror="this.onerror=null;this.src='/static/default-avatar.jpg'" />`:""}
                     <h2 style="font-size: 1.5rem;">${d.pageTitle}</h2>
                 </div>
             </a>
-            ${d.githubURL ? `<a href="${d.githubURL}" target="_blank"><button class="icon"><img
+            ${d.githubUrl ? `<a href="${d.githubUrl}" target="_blank"><button class="icon"><img
                         src="/static/icons/github.svg" /></button></a>`:''}
         </div>
 

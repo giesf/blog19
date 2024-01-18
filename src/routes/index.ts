@@ -6,7 +6,7 @@ import { getPosts } from "../data/Post";
 export async function get(req: SimpleGetRequest) {
     try {
         const posts = await getPosts();
-        const html = await renderView("index", { posts, pageTitle: config.pageTitle, githubURL: config.githubURL, avatarURL: config.avatarURL })
+        const html = await renderView("index", { posts, pageTitle: config.pageTitle, githubUrl: config.githubUrl, avatarUrl: config.avatarUrl })
         return new HTMLResponse(html)
     } catch (err: any) {
         return new HTMLResponse(err.message)

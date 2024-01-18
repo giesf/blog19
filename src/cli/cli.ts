@@ -6,7 +6,7 @@ import { commands, type CLICommand } from './commands';
 import { configKeyToEnvKey } from '../config/utils';
 
 const args = yargs(Bun.argv);
-const binaryName = path.parse(String(args._[1])).base
+const binaryName = "bunx blog19"
 const command = args._[2]
 const commandArguments = args._.slice(3)
 
@@ -30,7 +30,7 @@ if (typeof command == "string") {
 
     commands[command].handler(...commandArguments)
 }
-else if (args.help) {
+else if (args.help || args.h) {
     printHelp()
 }
 
