@@ -1,7 +1,7 @@
 {
   "name": "@giesf/se_19",
   "module": "src/server.ts",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "type": "module",
   "bin": {
     "@giesf/se_19": "src/cli/cli.ts"
