@@ -14,10 +14,12 @@ export const PostSchema = object({
     published_at: sqliteOptional(dateAsInt)
 })
 
+const defaultTitle = "Untitled draft"
+
 export type Post = Output<typeof PostSchema>
 
 export const createDraft = async () => {
-    const title = "Untitled draft"
+    const title = defaultTitle
     const slug = toKebabCase(title + "-" + new Date().getTime());
     const markdown_body = ""
     const draft_created_at = new Date();
@@ -40,7 +42,9 @@ export const saveDraft = async (slug: string, raw_title: string, raw_markdown_bo
     const title = parse(PostSchema.entries.title, raw_title);
     const markdown_body = parse(PostSchema.entries.markdown_body, raw_markdown_body);
     const now = new Date().getTime();
-    const newSlug = toKebabCase(title)
+
+    //@TODO unfuck the title -> slug dependency
+    const newSlug = title == defaultTitle ? toKebabCase(title + "-" + new Date().getTime()) : toKebabCase(title)
     await sqlite`UPDATE posts SET title = ${title}, slug = ${newSlug}, markdown_body = ${markdown_body}, last_edited_at = ${now} WHERE slug = ${slug};`
 
     const post = await getDraftOrPost(newSlug);
