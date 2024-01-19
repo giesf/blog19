@@ -57,9 +57,9 @@ You can edit `static/base.css` to change the style of blog19.
 If you fuck up you can alwas revoke your changes by running `bunx blog19 overwrite-css`
 
 ### HTTPS
-blog19 is designed to run behind some kind of proxy that terminates HTTPS. Check out [Caddy](https://caddyserver.com/) or soemthing similar.
+blog19 is designed to run behind some kind of proxy that terminates HTTPS. Check out [Caddy](https://caddyserver.com/) or something similar.
 
 ### Version safety
-It might make sense to explicitly define what version of blog19 you want to use by running blog19 like `bunx blog10@<verion> ...`
+It might make sense to explicitly define what version of blog19 you want to use by running blog19 like `bunx blog19@<verion> ...`
 
 
